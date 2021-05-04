@@ -11,7 +11,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-double scrollingOffset = 0;
+int scrollingOffset = 0;
 
 
 //Texture wrapper class
@@ -82,7 +82,7 @@ class Dot
 		void render();
 
 		//The X and Y offsets of the dot
-		double mPosX, mPosY;
+		int mPosX, mPosY;
 
 		//The velocity of the dot
 		int mVelX, mVelY;
@@ -524,17 +524,18 @@ int main( int argc, char* args[] )
 			int game_over = 0;
 			int score = 0;
 			int paused = 0;
-			double accelarator = 1;
-			int scrolling = 0;
 			std::stringstream score_text;
 
 			//The dot that will be moving around on the screen
 			Dot dot;
 			
 			
-			SDL_Rect point = {600, 250, 50, 50};
+			SDL_Rect point;
 			int is_point = 0;
 			int cnt = 0;
+
+			point.x = 500;
+			point.y = 250;
 
 
 			for(int i = 0; i < 5; i++) {
@@ -563,7 +564,7 @@ int main( int argc, char* args[] )
 					}
 					if(e.type == SDL_KEYDOWN && e.key.repeat == 0)
 					{
-						if(keypressed == SDLK_RETURN || keypressed == SDLK_KP_ENTER){
+						if(keypressed == SDLK_s){
 							started = 1;
 							paused = 0;
 						}
@@ -577,14 +578,14 @@ int main( int argc, char* args[] )
 					dot.handleEvent( e );
 				}
 
-				if(started == 0 || paused)
+				if(started == 0 && pause)
 				{
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 					SDL_RenderClear( gRenderer );
 
-					gFirstScreenTexture.loadFromRenderedText("press enter to start/resume the game", {0, 255, 120});
-					gFirstScreenTexture.render(SCREEN_WIDTH/2 - 220, SCREEN_HEIGHT/2 - 120);
-					gPuasedTexture.loadFromRenderedText("press p to pause anytime", {0, 122, 122});
+					gFirstScreenTexture.loadFromRenderedText("press s to start/resume the game\n", {0, 255, 120});
+					gFirstScreenTexture.render(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 120);
+					gPuasedTexture.loadFromRenderedText("press p to pause anytime\n", {0, 122, 122});
 					gPuasedTexture.render(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 90);
 					SDL_RenderPresent(gRenderer);
 					continue;
@@ -592,13 +593,13 @@ int main( int argc, char* args[] )
 
 				game_over = dot.move();
 
-				scrollingOffset -= accelarator;
-				dot.mPosX -= accelarator;
-				point.x -= accelarator;
+				--scrollingOffset;
+				--dot.mPosX;
+				--point.x;
 				SDL_Rect dott = {dot.mPosX, dot.mPosY, dot.DOT_WIDTH, dot.DOT_HEIGHT};
 				for(int i = 0; i < 5; i++){
-					wall_u[i].x -= accelarator;
-					wall_d[i].x -= accelarator;
+					--wall_u[i].x;
+					--wall_d[i].x;
 					if(dot.mPosX < -dot.DOT_WIDTH) game_over = 1;
 
 					if(wall_d[i].x < 0){
@@ -624,15 +625,12 @@ int main( int argc, char* args[] )
 
 				if(point.x < -point.w)
 				{
-					srand(time(0));
-					point.x = 600;
+					point.x = dot.mPosX + rand()%50 + 50;
 					point.y = 150 + rand()%50;
 					point.h = 50 + rand()%10;
-					point.w = point.h;
+					point.w = 50 + rand()%10;
 					is_point = 0;
 					cnt = 0;
-
-					//printf("y = %d, h = %d, w = %d\n", point.y, point.h, point.w);
 				}
 
 			
@@ -682,7 +680,7 @@ int main( int argc, char* args[] )
 				if(game_over)
 				{
 
-					gOverTexture.loadFromRenderedText("Game Over", {128, 0, 0});
+					gOverTexture.loadFromRenderedText("Game Over", {0, 0, 0});
 					gOverTexture.render(SCREEN_WIDTH/2 - 10, SCREEN_HEIGHT/2 - 10);
 					gScoreTexture.loadFromRenderedText(score_text.str().c_str(), {0, 0, 0});
 					gScoreTexture.render(SCREEN_WIDTH - 200, 0);
@@ -691,7 +689,7 @@ int main( int argc, char* args[] )
 					break;
 				}
 
-				if(scrolling%100 == 0) score++;
+				if(dot.mPosX%10 == 0) score++;
 				score_text.str("");
 				score_text<<"score: "<<score;
 
@@ -701,10 +699,6 @@ int main( int argc, char* args[] )
 
 				SDL_RenderPresent( gRenderer );
 				here:;
-
-				accelarator = accelarator + (scrolling%1500 == 0);
-				scrolling++;
-				//printf("%d\n", scrolling);
 			}
 		}
 	}
