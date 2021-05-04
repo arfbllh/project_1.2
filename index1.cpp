@@ -113,6 +113,7 @@ LTexture gOverTexture;
 LTexture gScoreTexture;
 LTexture gPointTexture;
 LTexture gFirstScreenTexture;
+LTexture gPuasedTexture;
 SDL_Rect wall_u[5];
 SDL_Rect wall_d[5];
 TTF_Font *gFont = NULL;
@@ -436,6 +437,10 @@ void close()
 	//Free loaded images
 	gDotTexture.free();
 	gBGTexture.free();
+	gFirstScreenTexture.free();
+	gScoreTexture.free();
+	gPuasedTexture.free();
+
 
 	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
@@ -446,6 +451,7 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+	TTF_Quit();
 }
 
 bool checkCollision( SDL_Rect a, SDL_Rect b )
@@ -517,6 +523,7 @@ int main( int argc, char* args[] )
 			SDL_Event e;
 			int game_over = 0;
 			int score = 0;
+			int paused = 0;
 			std::stringstream score_text;
 
 			//The dot that will be moving around on the screen
@@ -559,6 +566,11 @@ int main( int argc, char* args[] )
 					{
 						if(keypressed == SDLK_s){
 							started = 1;
+							paused = 0;
+						}
+						else if(keypressed == SDLK_p)
+						{
+							paused = 1;
 						}
 					}
 
@@ -566,13 +578,15 @@ int main( int argc, char* args[] )
 					dot.handleEvent( e );
 				}
 
-				if(started == 0)
+				if(started == 0 && pause)
 				{
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-					//SDL_RenderClear( gRenderer );
+					SDL_RenderClear( gRenderer );
 
-					gFirstScreenTexture.loadFromRenderedText("press s to start the game\n", {0, 255, 120});
+					gFirstScreenTexture.loadFromRenderedText("press s to start/resume the game\n", {0, 255, 120});
 					gFirstScreenTexture.render(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 120);
+					gPuasedTexture.loadFromRenderedText("press p to pause anytime\n", {0, 122, 122});
+					gPuasedTexture.render(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 90);
 					SDL_RenderPresent(gRenderer);
 					continue;
 				}

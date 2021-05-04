@@ -1,12 +1,18 @@
-//Using SDL, SDL_image, standard IO, and strings
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <stdio.h>
-#include <string>
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_image.h>
+#include<SDL2/SDL_ttf.h>
+#include<stdio.h>
+#include<string>
+#include<sstream>
+
+#define keypressed e.key.keysym.sym
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
+
+double scrollingOffset = 0;
+
 
 //Texture wrapper class
 class LTexture
@@ -20,11 +26,9 @@ class LTexture
 
 		//Loads image at specified path
 		bool loadFromFile( std::string path );
-
-		#if defined(SDL_TTF_MAJOR_VERSION)
+		
 		//Creates image from font string
 		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
-		#endif
 
 		//Deallocates texture
 		void free();
@@ -37,7 +41,7 @@ class LTexture
 
 		//Set alpha modulation
 		void setAlpha( Uint8 alpha );
-
+		
 		//Renders texture at given point
 		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
 
@@ -71,24 +75,17 @@ class Dot
 		//Takes key presses and adjusts the dot's velocity
 		void handleEvent( SDL_Event& e );
 
-		//Moves the dot and checks collision
-		void move( SDL_Rect& wall );
-
-		//Shows the dot on the screen relative to the camera
-		void render();
+		//Moves the dot
+		bool move();
 
 		//Shows the dot on the screen
-		//void render();
+		void render();
 
-    private:
 		//The X and Y offsets of the dot
-		int mPosX, mPosY;
+		double mPosX, mPosY;
 
 		//The velocity of the dot
 		int mVelX, mVelY;
-
-		//Dot's collision box
-		SDL_Rect mCollider;
 };
 
 //Starts up SDL and creates window
@@ -100,7 +97,7 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
-//Box collision detector
+
 bool checkCollision( SDL_Rect a, SDL_Rect b );
 
 //The window we'll be rendering to
@@ -112,6 +109,14 @@ SDL_Renderer* gRenderer = NULL;
 //Scene textures
 LTexture gDotTexture;
 LTexture gBGTexture;
+LTexture gOverTexture;
+LTexture gScoreTexture;
+LTexture gPointTexture;
+LTexture gFirstScreenTexture;
+LTexture gPuasedTexture;
+SDL_Rect wall_u[5];
+SDL_Rect wall_d[5];
+TTF_Font *gFont = NULL;
 
 LTexture::LTexture()
 {
@@ -168,7 +173,6 @@ bool LTexture::loadFromFile( std::string path )
 	return mTexture != NULL;
 }
 
-#if defined(SDL_TTF_MAJOR_VERSION)
 bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColor )
 {
 	//Get rid of preexisting texture
@@ -199,11 +203,10 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
 		printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
 	}
 
-
+	
 	//Return success
 	return mTexture != NULL;
 }
-#endif
 
 void LTexture::free()
 {
@@ -228,7 +231,7 @@ void LTexture::setBlendMode( SDL_BlendMode blending )
 	//Set blending function
 	SDL_SetTextureBlendMode( mTexture, blending );
 }
-
+		
 void LTexture::setAlpha( Uint8 alpha )
 {
 	//Modulate texture alpha
@@ -264,12 +267,8 @@ int LTexture::getHeight()
 Dot::Dot()
 {
     //Initialize the offsets
-    mPosX = 0;
-    mPosY = 0;
-
-	//Set collision box dimension
-	mCollider.w = DOT_WIDTH;
-	mCollider.h = DOT_HEIGHT;
+    mPosX = SCREEN_WIDTH/2;
+    mPosY = SCREEN_HEIGHT/2;
 
     //Initialize the velocity
     mVelX = 0;
@@ -282,7 +281,7 @@ void Dot::handleEvent( SDL_Event& e )
 	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        switch( e.key.keysym.sym )
+        switch( keypressed )
         {
             case SDLK_UP: mVelY -= DOT_VEL; break;
             case SDLK_DOWN: mVelY += DOT_VEL; break;
@@ -294,7 +293,7 @@ void Dot::handleEvent( SDL_Event& e )
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        switch( e.key.keysym.sym )
+        switch( keypressed )
         {
             case SDLK_UP: mVelY += DOT_VEL; break;
             case SDLK_DOWN: mVelY -= DOT_VEL; break;
@@ -304,37 +303,43 @@ void Dot::handleEvent( SDL_Event& e )
     }
 }
 
-void Dot::move( SDL_Rect& wall )
+bool Dot::move()
 {
     //Move the dot left or right
     mPosX += mVelX;
-	mCollider.x = mPosX;
 
-    //If the dot collided or went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + DOT_WIDTH > SCREEN_WIDTH ) || checkCollision( mCollider, wall ) )
+    //scrollingOffset -= mVelX;
+
+    SDL_Rect dott = {mPosX, mPosY, DOT_WIDTH, DOT_HEIGHT};
+
+    //If the dot went too far to the left or right
+    bool collided = 0;
+    for(int i = 0; i < 5; i++){
+    	collided |= checkCollision(dott, wall_u[i]);
+    	collided |= checkCollision(dott, wall_d[i]);
+    }
+    if( ( mPosX < 0 ) || ( mPosX + DOT_WIDTH > SCREEN_WIDTH ) || collided)
     {
         //Move back
         mPosX -= mVelX;
-		mCollider.x = mPosX;
     }
 
     //Move the dot up or down
     mPosY += mVelY;
-	mCollider.y = mPosY;
 
-    //If the dot collided or went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + DOT_HEIGHT > SCREEN_HEIGHT ) || checkCollision( mCollider, wall ) )
+    //If the dot went too far up or down
+    if( ( mPosY < 0 ) || ( mPosY + DOT_HEIGHT > SCREEN_HEIGHT )  || collided)
     {
         //Move back
         mPosY -= mVelY;
-		mCollider.y = mPosY;
     }
+    return collided;
 }
 
 void Dot::render()
 {
-    //Show the dot relative to the camera
-	gDotTexture.render( mPosX, mPosY);
+    //Show the dot
+	gDotTexture.render( mPosX, mPosY );
 }
 
 bool init()
@@ -384,6 +389,12 @@ bool init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+
+				if(TTF_Init() == -1)
+				{
+					printf("SDL_TTF could not initialize.\n");
+					printf("SDL_TTF Error: %s\n", TTF_GetError());
+				}
 			}
 		}
 	}
@@ -396,17 +407,25 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Load press texture
-	if( !gDotTexture.loadFromFile( "27_collision_detection/dot.bmp" ) )
+	//Load dot texture
+	if( !gDotTexture.loadFromFile( "assets/dot.bmp" ) )
 	{
 		printf( "Failed to load dot texture!\n" );
 		success = false;
 	}
 
 	//Load background texture
-	if( !gBGTexture.loadFromFile( "31_scrolling_backgrounds/bg.png" ) )
+	if( !gBGTexture.loadFromFile( "assets/bg.png" ) )
 	{
 		printf( "Failed to load background texture!\n" );
+		success = false;
+	}
+
+	gFont = TTF_OpenFont("assets/fonts.ttf", 30);
+
+	if(gFont == NULL)
+	{
+		printf("TTF_Font could not be loaded.\n");
 		success = false;
 	}
 
@@ -418,8 +437,12 @@ void close()
 	//Free loaded images
 	gDotTexture.free();
 	gBGTexture.free();
+	gFirstScreenTexture.free();
+	gScoreTexture.free();
+	gPuasedTexture.free();
 
-	//Destroy window
+
+	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
@@ -428,6 +451,7 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+	TTF_Quit();
 }
 
 bool checkCollision( SDL_Rect a, SDL_Rect b )
@@ -490,30 +514,43 @@ int main( int argc, char* args[] )
 			printf( "Failed to load media!\n" );
 		}
 		else
-		{
+		{	
 			//Main loop flag
 			bool quit = false;
+			bool started = false;
 
 			//Event handler
 			SDL_Event e;
+			int game_over = 0;
+			int score = 0;
+			int paused = 0;
+			double accelarator = 1;
+			int scrolling = 0;
+			std::stringstream score_text;
 
 			//The dot that will be moving around on the screen
 			Dot dot;
+			
+			
+			SDL_Rect point = {600, 250, 50, 50};
+			int is_point = 0;
+			int cnt = 0;
 
-			//The camera area
-			//SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+
+			for(int i = 0; i < 5; i++) {
+				wall_d[i].x = wall_u[i].x = 150 + i*150;
+				wall_d[i].y = SCREEN_HEIGHT - 100;
+				wall_d[i].h = 100;
+				wall_u[i].h = 100;
+				wall_u[i].y = 0;
+				wall_d[i].w = wall_u[i].w = 10;
+			}
+			
 
 			//The background scrolling offset
-			int scrollingOffset = 0;
-
-			//Set the wall
-			SDL_Rect wall;
-			wall.x = 640;
-			wall.y = 40;
-			wall.w = 40;
-			wall.h = 100;
 
 			//While application is running
+
 			while( !quit )
 			{
 				//Handle events on queue
@@ -524,44 +561,150 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
+					if(e.type == SDL_KEYDOWN && e.key.repeat == 0)
+					{
+						if(keypressed == SDLK_RETURN || keypressed == SDLK_KP_ENTER){
+							started = 1;
+							paused = 0;
+						}
+						else if(keypressed == SDLK_p)
+						{
+							paused = 1;
+						}
+					}
 
 					//Handle input for the dot
 					dot.handleEvent( e );
 				}
 
-				//Move the dot and check collision
-				dot.move( wall );
-
-				//Scroll background
-				--scrollingOffset;
-				--wall.x;
-				if( scrollingOffset < -gBGTexture.getWidth() )
+				if(started == 0 || paused)
 				{
-                    wall.x += SCREEN_WIDTH;
+					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+					SDL_RenderClear( gRenderer );
 
-
-                    scrollingOffset = 0;
+					gFirstScreenTexture.loadFromRenderedText("press enter to start/resume the game", {0, 255, 120});
+					gFirstScreenTexture.render(SCREEN_WIDTH/2 - 220, SCREEN_HEIGHT/2 - 120);
+					gPuasedTexture.loadFromRenderedText("press p to pause anytime", {0, 122, 122});
+					gPuasedTexture.render(SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 90);
+					SDL_RenderPresent(gRenderer);
+					continue;
 				}
 
-				//Clear screen
+				game_over = dot.move();
+
+				scrollingOffset -= accelarator;
+				dot.mPosX -= accelarator;
+				point.x -= accelarator;
+				SDL_Rect dott = {dot.mPosX, dot.mPosY, dot.DOT_WIDTH, dot.DOT_HEIGHT};
+				for(int i = 0; i < 5; i++){
+					wall_u[i].x -= accelarator;
+					wall_d[i].x -= accelarator;
+					if(dot.mPosX < -dot.DOT_WIDTH) game_over = 1;
+
+					if(wall_d[i].x < 0){
+						srand(time(0));
+						wall_d[i].x += SCREEN_WIDTH;
+						wall_u[i].x += SCREEN_WIDTH;
+
+						int w = (rand()%40 + 10);
+						int h = (rand()%150 + 10);
+						wall_d[i].y = SCREEN_HEIGHT - (SCREEN_HEIGHT - h - 200);
+						wall_d[i].w = w;
+						wall_d[i].h = (SCREEN_HEIGHT - h - 200);
+
+						wall_u[i].y = 0;
+						wall_u[i].w = w;
+						wall_u[i].h = h;
+					}
+				}
+				if( scrollingOffset < -gBGTexture.getWidth() )
+				{
+					scrollingOffset = 0;
+				}
+
+				if(point.x < -point.w)
+				{
+					srand(time(0));
+					point.x = 600;
+					point.y = 150 + rand()%50;
+					point.h = 50 + rand()%10;
+					point.w = point.h;
+					is_point = 0;
+					cnt = 0;
+
+					//printf("y = %d, h = %d, w = %d\n", point.y, point.h, point.w);
+				}
+
+			
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
-
 
 				//Render background
 				gBGTexture.render( scrollingOffset, 0 );
 				gBGTexture.render( scrollingOffset + gBGTexture.getWidth(), 0 );
 
-                //Render wall
-                SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                SDL_RenderDrawRect( gRenderer, &wall );
-
-
 				//Render objects
 				dot.render();
+				
+				for(int i = 0; i < 5; i++){
+	
 
-				//Update screen
+					//Update screen
+					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
+					SDL_RenderFillRect(gRenderer, &wall_u[i]);
+					SDL_RenderFillRect(gRenderer, &wall_d[i]);
+					SDL_RenderDrawRect( gRenderer, &wall_u[i]);
+					SDL_RenderDrawRect(gRenderer, &wall_d[i]);
+
+				}
+
+				//point count
+
+				if(checkCollision(dott, point) && !is_point) {
+					is_point = 1;
+					score += 10;
+				}
+				else if(is_point && cnt < 50)
+				{
+					gPointTexture.loadFromRenderedText("+10", {0, 128, 0});
+					gPointTexture.render(point.x, point.y + 20 + cnt);
+					cnt++;
+
+				}
+
+				if(is_point == 0){
+					SDL_SetRenderDrawColor(gRenderer, 0x0C, 0xA4, 0x94, 0x00);
+					SDL_RenderFillRect(gRenderer, &point);
+					SDL_RenderDrawRect(gRenderer, &point);
+				}
+
+
+				if(game_over)
+				{
+
+					gOverTexture.loadFromRenderedText("Game Over", {128, 0, 0});
+					gOverTexture.render(SCREEN_WIDTH/2 - 10, SCREEN_HEIGHT/2 - 10);
+					gScoreTexture.loadFromRenderedText(score_text.str().c_str(), {0, 0, 0});
+					gScoreTexture.render(SCREEN_WIDTH - 200, 0);
+					SDL_RenderPresent( gRenderer );
+					SDL_Delay(1000);
+					break;
+				}
+
+				if(scrolling%100 == 0) score++;
+				score_text.str("");
+				score_text<<"score: "<<score;
+
+				gScoreTexture.loadFromRenderedText(score_text.str().c_str(), {0, 0, 0});
+				gScoreTexture.render(SCREEN_WIDTH - 200, 0);
+
+
 				SDL_RenderPresent( gRenderer );
+				here:;
+
+				accelarator = accelarator + (scrolling%1500 == 0);
+				scrolling++;
+				//printf("%d\n", scrolling);
 			}
 		}
 	}
