@@ -1,0 +1,703 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"plt",
+				"play_btny"
+			],
+			[
+				"b",
+				"bPosition"
+			],
+			[
+				"win",
+				"Win_h"
+			],
+			[
+				"SDL_Get",
+				"SDL_GetWindowSize"
+			],
+			[
+				"mou",
+				"mouse_x"
+			],
+			[
+				"mouse",
+				"mouse_x"
+			],
+			[
+				"sh",
+				"SH"
+			],
+			[
+				"sw",
+				"SW"
+			],
+			[
+				"ch",
+				"checkCollision"
+			],
+			[
+				"wa",
+				"Wall"
+			],
+			[
+				"bot",
+				"bottomA"
+			],
+			[
+				"rig",
+				"rightA"
+			],
+			[
+				"gF",
+				"gFPSTextTexture"
+			],
+			[
+				"mST",
+				"mStartTicks"
+			],
+			[
+				"uin",
+				"Uint32"
+			],
+			[
+				"mp",
+				"mPausedTicks"
+			],
+			[
+				"mc",
+				"mxcnt"
+			],
+			[
+				"pri",
+				"print_value"
+			],
+			[
+				"Bi",
+				"BigInt"
+			],
+			[
+				"B",
+				"BigInt_New"
+			],
+			[
+				"Big",
+				"BigInt"
+			],
+			[
+				"pr",
+				"print_value"
+			],
+			[
+				"mt",
+				"my_strlen"
+			],
+			[
+				"en",
+				"endl"
+			],
+			[
+				"D",
+				"DOWN"
+			],
+			[
+				"helW",
+				"HelloWorld"
+			],
+			[
+				"su",
+				"success"
+			],
+			[
+				"ini",
+				"initialize"
+			],
+			[
+				"sc",
+				"SCREEN_WIDTH"
+			],
+			[
+				"stdhi",
+				"stdio.h\tstandard header (deprecated)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "practice/header.cpp",
+			"settings":
+			{
+				"buffer_size": 7946,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 15272,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lTexture.cpp",
+			"settings":
+			{
+				"buffer_size": 3927,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "practice/button.cpp",
+			"settings":
+			{
+				"buffer_size": 1549,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arifbillah/Desktop/SDL/17_mouse_events.cpp",
+			"settings":
+			{
+				"buffer_size": 10359,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "practice/menu.cpp",
+			"settings":
+			{
+				"buffer_size": 1496,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arifbillah/Desktop/Life_of_Naimujjaman-master/index5.cpp",
+			"settings":
+			{
+				"buffer_size": 90155,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/User/cpp_timout.sublime-build",
+					""
+				],
+				[
+					"Packages/User/cpp_timout.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/User/cpp_timout.sublime-build",
+				"Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"color ",
+				"UI: Select Color Scheme"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"fonts ",
+				"Preferences: Package Control Settings"
+			],
+			[
+				"au",
+				"Automatic Backups: Merge viewed history file with latest"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet:",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"can",
+				"Build: Cancel"
+			],
+			[
+				"",
+				"Build: Cancel"
+			],
+			[
+				"inslta",
+				"Package Control: Install Local Dependency"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/arifbillah/Desktop/Game",
+		"/home/arifbillah/Desktop/Game/practice"
+	],
+	"file_history":
+	[
+		"/home/arifbillah/Downloads/null (1)/Life_of_Naimujjaman-master/index.cpp",
+		"/home/arifbillah/Desktop/Game/practice/loadmedia.cpp",
+		"/home/arifbillah/Desktop/SDL/35_window_events.cpp",
+		"/home/arifbillah/Desktop/Life_of_Naimujjaman-master/index.cpp",
+		"/home/arifbillah/Desktop/PS/Practice/output.txt",
+		"/home/arifbillah/Desktop/PS/Practice/input.txt",
+		"/home/arifbillah/Desktop/PS/Practice/5.cpp",
+		"/home/arifbillah/Desktop/PS/Practice/4.cpp",
+		"/home/arifbillah/Desktop/PS/Practice/3.cpp",
+		"/home/arifbillah/Desktop/PS/Practice/2.cpp",
+		"/home/arifbillah/Desktop/PS/Practice/1.cpp",
+		"/home/arifbillah/Desktop/SDL/28.cpp",
+		"/home/arifbillah/Desktop/SDL/29_circular_collision_detection.cpp",
+		"/home/arifbillah/Desktop/SDL/1.cpp",
+		"/home/arifbillah/Desktop/SDL/26.cpp",
+		"/home/arifbillah/Desktop/SDL/25.cpp",
+		"/home/arifbillah/Desktop/SDL/24.cpp",
+		"/home/arifbillah/Desktop/SDL/23.cpp",
+		"/home/arifbillah/Desktop/SDL/untitlecpp",
+		"/home/arifbillah/Desktop/SDL/22.cpp",
+		"/home/arifbillah/Desktop/SDL/22_timing.cpp",
+		"/home/arifbillah/Desktop/SDL/18_key_states.cpp",
+		"/home/arifbillah/Desktop/SDL/17_mouse_events.cpp",
+		"/home/arifbillah/Downloads/18_key_states.cpp",
+		"/home/arifbillah/Downloads/17_mouse_events.cpp",
+		"/home/arifbillah/Desktop/SDL/15.cpp",
+		"/home/arifbillah/Desktop/SDL/16.cpp",
+		"/home/arifbillah/Desktop/PS/lightoj/1449.cpp",
+		"/home/arifbillah/Desktop/PS/lightoj/1447.cpp",
+		"/home/arifbillah/Desktop/PS/lightoj/1023_bractracking.cpp",
+		"/home/arifbillah/Desktop/PS/codeforces/Problemset/1393C.cpp",
+		"/home/arifbillah/Desktop/SDL/7.cpp",
+		"/home/arifbillah/Desktop/SDL/5.cpp",
+		"/home/arifbillah/Desktop/SDL/08_geometry_rendering/08_geometry_rendering.cpp",
+		"/home/arifbillah/Desktop/assignment/output.txt",
+		"/home/arifbillah/Desktop/assignment/input.txt",
+		"/home/arifbillah/Desktop/assignment/B2.cpp",
+		"/home/arifbillah/Desktop/assignment/F.cpp",
+		"/home/arifbillah/Desktop/assignment/Biginteger.cpp",
+		"/home/arifbillah/Desktop/PS/UVA/10106uva.cpp",
+		"/home/arifbillah/Desktop/assignment/D.cpp",
+		"/home/arifbillah/Desktop/assignment/B.cpp",
+		"/home/arifbillah/Desktop/PS/codeforces/1496/C.cpp",
+		"/home/arifbillah/Desktop/assignment/1.cpp",
+		"/home/arifbillah/Desktop/assignment/C.cpp",
+		"/home/arifbillah/Desktop/Essential Code for Lab/template.cpp",
+		"/home/arifbillah/Desktop/assignment/g.cpp",
+		"/home/arifbillah/Desktop/assignment/A.cpp",
+		"/media/arifbillah/E/Arif/LAB/Essential Code for Lab/template.cpp",
+		"/home/arifbillah/Desktop/assignment/output.txt\\",
+		"/home/arifbillah/Desktop/PS/Practice/A.cpp",
+		"/home/arifbillah/Desktop/PS/git_update.sh",
+		"/home/arifbillah/Desktop/PS/Practice/2",
+		"/home/arifbillah/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/arifbillah/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
+		"/home/arifbillah/Desktop/PS/Others/dijkstra.cpp",
+		"/home/arifbillah/Desktop/PS/UVA/471uva.cpp",
+		"/home/arifbillah/.config/sublime-text-3/Packages/User/xxloj.sublime-snippet",
+		"/home/arifbillah/.config/sublime-text-3/Packages/User/codestarter.sublime-snippet",
+		"/home/arifbillah/Desktop/PS/codeforces/1498/C.cpp",
+		"/home/arifbillah/Desktop/PS/codeforces/1498/B.cpp",
+		"/home/arifbillah/Desktop/PS/codeforces/1498/A.cpp",
+		"/home/arifbillah/Desktop/SDL/05_optimized_surface_loading_and_soft_stretching/05_optimized_surface_loading_and_soft_stretching.cpp",
+		"/home/arifbillah/Desktop/SDL/4.cpp",
+		"/home/arifbillah/Desktop/SDL/4_1.cpp",
+		"/home/arifbillah/Desktop/SDL/03_event_driven_programming/4.cpp",
+		"/home/arifbillah/Desktop/SDL/03_event_driven_programming/03_event_driven_programming.cpp",
+		"/home/arifbillah/Desktop/SDL/3_1.cpp",
+		"/home/arifbillah/Desktop/SDL/2_1.cpp",
+		"/home/arifbillah/Desktop/SDL/1_1.CPP",
+		"/home/arifbillah/Desktop/Pong with Computer/main.cpp",
+		"/home/arifbillah/Desktop/Pong with Computer/Pong_with_computer.sublime-project",
+		"/home/arifbillah/Desktop/SDL/2.cpp",
+		"/home/arifbillah/Desktop/src/main4.cpp",
+		"/home/arifbillah/Downloads/Life_of_Naimujjaman-master (extract.me)/Life_of_Naimujjaman-master/index.cpp",
+		"/home/arifbillah/Downloads/Life_of_Naimujjaman-master (extract.me)/Life_of_Naimujjaman-master/index2.cpp",
+		"/home/arifbillah/Downloads/Life_of_Naimujjaman-master (extract.me)/Life_of_Naimujjaman-master/index3.cpp",
+		"/home/arifbillah/Downloads/Life_of_Naimujjaman-master (extract.me)/Life_of_Naimujjaman-master/index4.cpp",
+		"/home/arifbillah/Downloads/Life_of_Naimujjaman-master (extract.me)/Life_of_Naimujjaman-master/index5.cpp",
+		"/home/arifbillah/.config/sublime-text-3/Packages/User/cpp_timout.sublime-build"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"int SW, int SH, ",
+			"button_width",
+			"main",
+			"Button",
+			"hover",
+			"button",
+			"double"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "practice/header.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7946,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5367,
+								5367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 181.0,
+						"translation.y": 4184.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10295,
+								10295
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 7803.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lTexture.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3927,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3927,
+								3927
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "practice/button.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1549,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								291,
+								291
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 204.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/arifbillah/Desktop/SDL/17_mouse_events.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6588.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "practice/menu.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1496,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								362,
+								362
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 204.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/arifbillah/Desktop/Life_of_Naimujjaman-master/index5.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 90155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								512,
+								512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 97.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "game.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 50.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}
