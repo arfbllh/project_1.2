@@ -1,3 +1,6 @@
+#include "menu_other_screen.cpp"
+/*
+
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_ttf.h>
@@ -498,6 +501,7 @@ bool checkCollision( SDL_Rect a, SDL_Rect b )
     //If none of the sides from A are outside B
     return true;
 }
+*/
 
 int main( int argc, char* args[] )
 {
@@ -515,6 +519,11 @@ int main( int argc, char* args[] )
 		}
 		else
 		{	
+
+			if(on_menu){
+				show_menu_otherscreen();
+				continue;
+			}
 			//Main loop flag
 			bool quit = false;
 			bool started = false;
@@ -576,6 +585,12 @@ int main( int argc, char* args[] )
 					//Handle input for the dot
 					dot.handleEvent( e );
 				}
+
+				if(on_menu){
+					show_menu_otherscreen(e);
+					continue;
+				}
+
 
 				if(started == 0 || paused)
 				{
