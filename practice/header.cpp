@@ -1,6 +1,7 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_ttf.h>
+#include<SDL2/SDL_mixer.h>
 #include<stdio.h>
 #include<string>
 #include<sstream>
@@ -78,6 +79,9 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
+Mix_Music *gMusic = NULL;
+Mix_chunk *gClick = NULL;
+
 //Scene textures
 LTexture gDotTexture;
 LTexture gBGTexture;
@@ -87,7 +91,7 @@ LTexture gPointTexture;
 LTexture gFirstScreenTexture;
 LTexture gPuasedTexture;
 //menu texture
-LTexture play_button, play_button_sh, setting_button, score_button, help_button, quit_button;
+LTexture play_button, play_button_sh, setting_button, setting_button_sh, score_button, score_button_sh, help_button, help_button_sh, quit_button, quit_button_sh;
 
 SDL_Rect wall_u[5];
 SDL_Rect wall_d[5];
@@ -292,6 +296,11 @@ bool init()
 					printf("SDL_TTF could not initialize.\n");
 					printf("SDL_TTF Error: %s\n", TTF_GetError());
 				}
+				if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				{
+					printf("SDL_Mixer Could not initialize!\n");
+					printf("SDL_mixer Error: %s\n", Mix_GetError());
+				}
 			}
 		}
 	}
@@ -314,10 +323,18 @@ bool loadMedia()
 	//menu meadia loading
 	success = success & play_button.loadFromFile("assets/button_play.png");
 	success = success & play_button_sh.loadFromFile("assets/button_play(2).png");
-	success = success & setting_button.loadFromFile("assets/setting_button.png");
-	success = success &	help_button.loadFromFile("assets/help_button.png");
-	success = success &	score_button.loadFromFile("assets/score_button.png");
-	success = success &	quit_button.loadFromFile("assets/quit_button.png");
+	success = success & setting_button.loadFromFile("assets/button_settings.png");
+	success = success & setting_button_sh.loadFromFile("assets/button_settings(2).png");
+	success = success &	help_button.loadFromFile("assets/button_help.png");
+	success = success &	help_button_sh.loadFromFile("assets/button_help(2).png");
+	success = success &	score_button.loadFromFile("assets/button_score.png");
+	success = success &	score_button_sh.loadFromFile("assets/button_score(2).png");
+	success = success &	quit_button.loadFromFile("assets/button_quit.png");
+	success = success & quit_button_sh.loadFromFile("assets/button_quit(2).png");
+
+	//music
+
+	success = success & ((gHelp = Mix_LoadMUS("assets/help.mp3")) != NULL);
 
 
 	return success;
@@ -343,6 +360,7 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 	TTF_Quit();
+	Mix_Quit();
 }
 
 bool checkCollision( SDL_Rect a, SDL_Rect b )
