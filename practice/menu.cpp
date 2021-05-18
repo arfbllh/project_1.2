@@ -1,4 +1,5 @@
 #include "header.cpp"
+#include "loadMedia.cpp"
 //#include "button.cpp"
 
 int Win_H, Win_W;

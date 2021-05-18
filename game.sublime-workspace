@@ -147,25 +147,16 @@
 			"file": "header.cpp",
 			"settings":
 			{
-				"buffer_size": 9163,
+				"buffer_size": 9079,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "main.cpp",
+			"file": "loadMedia.cpp",
 			"settings":
 			{
-				"buffer_size": 15448,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "main2.cpp",
-			"settings":
-			{
-				"buffer_size": 539,
+				"buffer_size": 1509,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -180,10 +171,10 @@
 			}
 		},
 		{
-			"file": "practice/menu.cpp",
+			"file": "main2.cpp",
 			"settings":
 			{
-				"buffer_size": 2082,
+				"buffer_size": 798,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -286,6 +277,12 @@
 	],
 	"file_history":
 	[
+		"/home/arifbillah/Desktop/Game/pinkman.cpp",
+		"/home/arifbillah/Desktop/SDL/27_collision_detection.cpp",
+		"/home/arifbillah/Desktop/Game/character.cpp",
+		"/home/arifbillah/Downloads/null/Life_of_Naimujjaman-master/index5.cpp",
+		"/home/arifbillah/Desktop/Game/main.cpp",
+		"/home/arifbillah/Desktop/Game/practice/menu.cpp",
 		"/home/arifbillah/Desktop/Game/game.sublime-workspace",
 		"/home/arifbillah/Desktop/PS/TSC/11/Inifinite_2D_Array.cpp",
 		"/home/arifbillah/Desktop/Game/practice/menu_other_screen.cpp",
@@ -390,6 +387,18 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"mPosY",
+			"mPosX",
+			"DOT_VEL",
+			"DOT_HEIGHT",
+			"DOT_WIDTH",
+			"DOT_HEIGHT",
+			"DOT_WIDTH",
+			"Dot",
+			"fly",
+			"Media",
+			"media",
+			"png",
 			"settig",
 			"setting",
 			"seetig",
@@ -447,7 +456,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -456,15 +465,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9163,
+						"buffer_size": 9079,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8022,
-								8022
+								1219,
+								1219
 							]
 						],
 						"settings":
@@ -473,56 +482,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5461.0,
+						"translation.y": 784.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "main.cpp",
+					"file": "loadMedia.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15448,
+						"buffer_size": 1509,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1793,
-								1793
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1395.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "main2.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 539,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								527,
-								527
+								1456,
+								1456
 							]
 						],
 						"settings":
@@ -533,11 +513,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "menu_other_screen.cpp",
 					"semi_transient": false,
 					"settings":
@@ -549,8 +529,8 @@
 						"selection":
 						[
 							[
-								2960,
-								2960
+								187,
+								187
 							]
 						],
 						"settings":
@@ -559,39 +539,38 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2789.0,
+						"translation.y": 495.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "practice/menu.cpp",
+					"buffer": 3,
+					"file": "main2.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2082,
+						"buffer_size": 798,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								837,
-								837
+								596,
+								596
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 491.0,
+						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -599,7 +578,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -640,7 +619,7 @@
 	"project": "game.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
