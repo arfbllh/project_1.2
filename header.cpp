@@ -6,11 +6,14 @@
 #include<string>
 #include<sstream>
 
+
 #define keypressed e.key.keysym.sym
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
+
+int pinkmanx = 0, pinkmany = 0, vel = 10, mVelX, mVelY, state = 0;
 
 double width_ratio, heigt_ratio;
 
@@ -52,7 +55,6 @@ class LTexture
 		int getWidth();
 		int getHeight();
 
-	private:
 		//The actual hardware texture
 		SDL_Texture* mTexture;
 
@@ -65,7 +67,6 @@ class LTexture
 bool init();
 
 //Loads media
-bool loadMedia();
 
 //Frees media and shuts down SDL
 void close();
@@ -90,7 +91,9 @@ LTexture gScoreTexture;
 LTexture gPointTexture;
 LTexture gFirstScreenTexture;
 LTexture gPuasedTexture;
-//menu texture
+LTexture gPinkManTexture;
+LTexture pinkman[10];
+LTexture gFly1, gFly2, gFly3;
 LTexture play_button, play_button_sh, setting_button, setting_button_sh, score_button, score_button_sh, help_button, help_button_sh, quit_button, quit_button_sh;
 
 SDL_Rect wall_u[5];
@@ -309,60 +312,6 @@ bool init()
 	return success;
 }
 
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
-
-	//Load dot texture
-	success = success & gDotTexture.loadFromFile( "assets/dot.bmp" );
-	//Load background texture
-	success = success &	gBGTexture.loadFromFile( "assets/bg.png" );
-
-	//success = success &	gFont = TTF_OpenFont("assets/fonts.ttf", 30);
-
-	//menu meadia loading
-	success = success & play_button.loadFromFile("assets/button_play.png");
-	success = success & play_button_sh.loadFromFile("assets/button_play(2).png");
-	success = success & setting_button.loadFromFile("assets/button_settings.png");
-	success = success & setting_button_sh.loadFromFile("assets/button_settings(2).png");
-	success = success &	help_button.loadFromFile("assets/button_help.png");
-	success = success &	help_button_sh.loadFromFile("assets/button_help(2).png");
-	success = success &	score_button.loadFromFile("assets/button_score.png");
-	success = success &	score_button_sh.loadFromFile("assets/button_score(2).png");
-	success = success &	quit_button.loadFromFile("assets/button_quit.png");
-	success = success & quit_button_sh.loadFromFile("assets/button_quit(2).png");
-
-
-	//music
-	;
-	success = success & ((gHelp = Mix_LoadMUS("assets/help.mp3")) != NULL);
-	success = success & ((gClick = Mix_LoadWAV("assets/click.wav")) != NULL);
-
-	return success;
-}
-
-void close()
-{
-	//Free loaded images
-	gDotTexture.free();
-	gBGTexture.free();
-	gFirstScreenTexture.free();
-	gScoreTexture.free();
-	gPuasedTexture.free();
-
-
-	//Destroy window	
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
-
-	//Quit SDL subsystems
-	IMG_Quit();
-	SDL_Quit();
-	TTF_Quit();
-}
 
 bool checkCollision( SDL_Rect a, SDL_Rect b )
 {
@@ -405,6 +354,71 @@ bool checkCollision( SDL_Rect a, SDL_Rect b )
         return false;
     }
 
-    //If none of the sides from A are outside B
+    //If none of the sides from A are outside Bclear
     return true;
+}
+
+void pinkman_handleEvent( SDL_Event& e )
+{
+    //If a key was pressed
+	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mVelY -= vel; break;
+            case SDLK_DOWN: mVelY += vel; break;
+            case SDLK_LEFT: mVelX -= vel; break;
+            case SDLK_RIGHT: mVelX += vel; break;
+        }
+    }
+    //If a key was released
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP: mVelY += vel; break;
+            case SDLK_DOWN: mVelY -= vel; break;
+            case SDLK_LEFT: mVelX += vel; break;
+            case SDLK_RIGHT: mVelX -= vel; break;
+        }
+    }
+}
+
+void pinkman_move()
+{
+    //Move the dot left or right
+    pinkmanx += mVelX;
+
+    //Move the dot up or down
+    pinkmany += mVelY;
+
+    //If the dot collided or went too far up or down
+    if( ( pinkmany < 0 ) || ( pinkmany + pinkman[state].getHeight() > SCREEN_HEIGHT ) )
+    {
+        //Move back
+        pinkmany -= mVelY;
+    }
+}
+
+void close()
+{
+	//Free loaded images
+	gBGTexture.free();
+	gFirstScreenTexture.free();
+	gScoreTexture.free();
+	gPuasedTexture.free();
+
+
+	//Destroy window	
+	SDL_DestroyRenderer( gRenderer );
+	SDL_DestroyWindow( gWindow );
+	gWindow = NULL;
+	gRenderer = NULL;
+
+	//Quit SDL subsystems
+	IMG_Quit();
+	SDL_Quit();
+	TTF_Quit();
 }
